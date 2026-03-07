@@ -1,4 +1,4 @@
-Import InventoryTool from '../components/InventoryTool'
+import InventoryTool from '../components/InventoryTool'
 
 export default function AppPage() {
   return (
