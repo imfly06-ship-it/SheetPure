@@ -1,0 +1,3 @@
+module.exports=[23875,a=>{"use strict";var b=a.i(18332);a.i(45174);var c=a.i(48251),d=a.i(54163),e=a.i(96327);async function f({children:a}){let f=await (0,d.createClient)(),{data:{user:g}}=await f.auth.getUser();return g||(0,c.redirect)("/login"),(0,b.jsxs)("div",{style:{minHeight:"100vh",display:"flex",flexDirection:"column",background:"var(--surface)"},children:[(0,b.jsx)(e.default,{userEmail:g.email??""}),(0,b.jsx)("main",{style:{flex:1},children:a})]})}a.s(["default",()=>f])}];
+
+//# sourceMappingURL=frontend_app_app_layout_tsx_4ada843d._.js.map
