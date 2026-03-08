@@ -1,9 +1,7 @@
-import { ReactNode } from "react";
-
-
-
-export default function AppLayout({ children }: { children: ReactNode }) {
-
-return <>{children}</>;
-
+Export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  )
 }
