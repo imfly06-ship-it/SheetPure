@@ -1,4 +1,4 @@
-Export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic'
 
 import InventoryTool from '../components/InventoryTool'
 
