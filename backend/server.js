@@ -847,7 +847,7 @@ Score based on: handwriting clarity, image quality, ambiguous characters, partia
     }
 
     const response = await anthropic.messages.create({
-      model: 'claude-3-5-sonnet-latest',
+      model: 'claude-sonnet-4-5',
       max_tokens: 4096,
       messages: [{
         role: 'user',
@@ -954,7 +954,7 @@ Score based on: handwriting clarity, image quality, ambiguous characters, partia
     }
 
     const response = await anthropic.messages.create({
-      model: 'claude-3-5-sonnet-latest',
+      model: 'claude-sonnet-4-5',
       max_tokens: 4096,
       messages: [{
         role: 'user',
