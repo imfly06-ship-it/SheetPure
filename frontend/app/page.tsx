@@ -3,7 +3,7 @@ import Link from 'next/link'
 export const dynamic = 'force-dynamic'
 
 export default function LandingPage() {
-  const orange = '#f97316'
+  const orange = '#C4622D'
   const cream = '#fdf7ee'
   const ink = '#111827'
 
@@ -138,9 +138,8 @@ export default function LandingPage() {
               maxWidth: 520,
             }}
           >
-            StockScan turns photos of your shelves into a clean, export‑ready inventory sheet. Built
-            for bars, restaurants, and busy operators who can&apos;t afford to spend Sunday night in
-            a spreadsheet.
+            StockScan reads your physical inventory sheets instantly, auto-flags errors, lets you
+            edit any item, and exports directly to Excel.
           </p>
 
           <div

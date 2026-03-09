@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './page.module.css';
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://sheetpure.onrender.com';
+const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? 'https://sheetpure.onrender.com';
 
 // Inject spinner keyframe once
 if (typeof document !== 'undefined' && !document.getElementById('spin-style')) {
