@@ -822,6 +822,7 @@ Rules:
 - Preserve decimal quantities exactly as written (e.g. 3.25, 0.5)
 - Order amounts may be numbers, "check", X, or a dash
 - Missing values should be null
+- If you cannot read an item name with confidence, output "UNCLEAR" instead of guessing. Never substitute or invent item names.
 - Return ONLY valid JSON array, no explanations
 
 For each row include a "_confidence" field (0-100) reflecting how clearly you could read that row.
@@ -837,6 +838,7 @@ Rules:
 - Preserve decimal quantities exactly as written (e.g. 3.25, 0.5)
 - Order amounts may be numbers, "check", X, or a dash
 - Missing values should be null
+- If you cannot read an item name with confidence, output "UNCLEAR" instead of guessing. Never subsitute or invent item names.
 - Return ONLY valid JSON array, no explanations
 
 Return a JSON array where each object has: item_category, item_description, unit, par_level, on_hand, order_amount, _confidence
