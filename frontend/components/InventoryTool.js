@@ -26,7 +26,7 @@ const getDefaultSessionName = () =>
 
 const AREA_SUGGESTIONS = ['Bar', 'Dry Storage', 'Walk-In', 'Produce', 'Freezer', 'Prep Kitchen', 'Front of House', 'Cellar'];
 
-export default function Home(props) {
+export default function InventoryTool({ userId = 'demo-business' }) {
 
   // ─── Navigation ──────────────────────────────────────────────────────────────
   const [view, setView] = useState(VIEW_HOME);
@@ -34,7 +34,7 @@ export default function Home(props) {
   const [currentArea, setCurrentArea] = useState(null);
 
   // ─── Home ─────────────────────────────────────────────────────────────────────
-  const [businessId, setBusinessId] = useState(propagateServerField.userId ||'demo-business');
+  const [businessId, setBusinessId] = useState(userId || 'demo-business');
   const [sessions, setSessions] = useState([]);
   const [loadingSessions, setLoadingSessions] = useState(false);
   const [newSessionName, setNewSessionName] = useState('');

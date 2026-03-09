@@ -70,7 +70,7 @@ export default function SignupPage() {
             We sent a confirmation link to <strong>{email}</strong>.
             Click it to activate your free trial.
           </p>
-          <Link href="/login" className="btn btn-secondary">
+          <Link href="/app/login" className="btn btn-secondary">
             Back to login
           </Link>
         </div>
@@ -206,7 +206,7 @@ export default function SignupPage() {
 
         <p style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.85rem', color: 'var(--ink-faint)' }}>
           Already have an account?{' '}
-          <Link href="/login" style={{ color: 'var(--accent)', fontWeight: 500, textDecoration: 'none' }}>
+          <Link href="/app/login" style={{ color: 'var(--accent)', fontWeight: 500, textDecoration: 'none' }}>
             Sign in
           </Link>
         </p>
