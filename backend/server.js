@@ -844,6 +844,8 @@ Rules:
 - Return ONLY valid JSON array, no explanations
 
 Return a JSON array where each object has: item_category, item_description, unit, par_level, on_hand, order_amount, _confidence
+Only include item_category if the sheet actually has a visible category column. 
+If there is no colimn on the sheet, omit item_category entirely.
 
 The _confidence field (0-100) reflects how clearly you could read that row from the image.
 Score based on: handwriting clarity, image quality, ambiguous characters, partially visible text.
