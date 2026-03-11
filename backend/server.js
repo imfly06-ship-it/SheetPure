@@ -830,7 +830,7 @@ For each row include a "_confidence" field (0-100) reflecting how clearly you co
 Score based on: handwriting clarity, image quality, ambiguous characters, partially visible text.
 90+ = clearly legible, 70-89 = minor ambiguity, below 70 = significant uncertainty.`;
     } else {
-      Prompt = `You are a restaurant inventory extraction AI. Look at this inventory sheet image and extract all the data.
+      prompt = `You are a restaurant inventory extraction AI. Look at this inventory sheet image and extract all the data.
 
 IMPORTANT: First look at the actual column headers on this sheet and use those exact columns. Do not assume a fixed structure. Common patterns include: Item/Unit/Par/On Hand/Order, or Item Category/Item Description/Unit/Par Level/On Hand/Order Amount, or other variations — always follow what's actually on the sheet. Use the exact column names as your JSON keys (lowercase, underscores for spaces).
 
