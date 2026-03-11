@@ -819,6 +819,7 @@ CRITICAL: You MUST use EXACTLY these columns: ${templateColumns.join(', ')}
 
 Rules:
 - Extract only actual inventory items
+- item_category must be read directly from the sheet exactly as written - do NOT infer or default to "Produce" or any other category
 - Preserve decimal quantities exactly as written (e.g. 3.25, 0.5)
 - Order amounts may be numbers, "check", X, or a dash
 - Missing values should be null
@@ -835,6 +836,7 @@ The sheet has these columns: Item Category, Item Description, Unit (Box/Bag/Case
 
 Rules:
 - Extract only actual inventory items
+- item_category must be read directly from the sheet exactly as written - do NOT infer or default to "Produce" or any other category
 - Preserve decimal quantities exactly as written (e.g. 3.25, 0.5)
 - Order amounts may be numbers, "check", X, or a dash
 - Missing values should be null
