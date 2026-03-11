@@ -756,7 +756,8 @@ app.post('/api/parse-inventory', upload.single('image'), async (req, res) => {
     console.log('Parsing inventory image with Claude Vision...');
     const inventory = await parseInventoryWithClaudeBuffer(fileBuffer, mimetype, templateColumns);
 
-    const inventoryWithOrderAmounts = inventory.map(item => {
+    const normalizedInventory = normalizeUnits(inventory);
+    const inventoryWithOrderAmounts = normalizedInventory.map(item => {
       const par = parseFloat(item.par_level);
       const onHand = parseFloat(item.on_hand);
       if (!isNaN(par) && !isNaN(onHand)) {
@@ -803,9 +804,12 @@ app.post('/api/parse-inventory', upload.single('image'), async (req, res) => {
 async function parseInventoryWithClaudeBuffer(fileBuffer, mimetype, templateColumns = null) {
   try {
     const compressedBuffer = await sharp(fileBuffer)
-      .resize(2000, 2000, { fit: 'inside', withoutEnlargement: true })
-      .jpeg({ quality: 80 })
-      .toBuffer();
+  .trim()
+  .grayscale()
+  .normalize()
+  .resize(2000, 2000, { fit: 'inside' })
+  .jpeg({ quality: 85 })
+  .toBuffer();
     const base64Image = compressedBuffer.toString('base64');
 
     // sharp always outputs jpeg (we compress with .jpeg()), so media type is always image/jpeg
@@ -989,6 +993,29 @@ Score based on: handwriting clarity, image quality, ambiguous characters, partia
   }
 }
 
+function normalizeUnits(inventory) {
+  const unitMap = {
+    'b': 'lb', 'B': 'lb', 'lib': 'lb', 'Lib': 'lb', 'LIB': 'lb',
+    'lbs': 'lb', 'LBS': 'lb', 'LB': 'lb',
+    'c/b': 'LB', 'cb': 'LB',
+    'grl': 'qt', 'GRL': 'qt',
+    'Gal': 'gal', 'GAL': 'gal',
+    'Oz': 'oz', 'OZ': 'oz',
+    'Ea': 'ea', 'EA': 'ea',
+    'Case': 'case', 'CASE': 'case',
+    'Box': 'box', 'BOX': 'box',
+    'Bag': 'bag', 'BAG': 'bag',
+    'bt': 'btl', 'bT': 'btl', 'BT': 'btl',
+    'Btl': 'btl', 'BTL': 'btl',
+  };
+
+  return inventory.map(item => {
+    if (item.unit && unitMap[item.unit.trim()]) {
+      item.unit = unitMap[item.unit.trim()];
+    }
+    return item;
+  });
+}
 function parseInventoryTextBasic(text, templateColumns = null) {
   const inventory = [];
   const lines = text.split('\n');
