@@ -15,9 +15,9 @@
   --border-soft: #f2ede8;
   --surface: #faf7f4;
   --white: #fffcf9;
-  --accent: #c4622d;
-  --accent-dark: #a84e22;
-  --accent-light: #fdeee5;
+  --accent: #a8694a;
+  --accent-dark: #8a5239;
+  --accent-light: #faede6;
   --success: #16a34a;
   --warn: #d97706;
   --danger: #dc2626;
@@ -100,7 +100,7 @@ h1, h2, h3, h4, h5, h6 {
 .btn-accent:hover {
   background: var(--accent-dark);
   transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(196, 98, 45, 0.35);
+  box-shadow: 0 4px 20px rgba(168, 105, 74, 0.3);
 }
 
 .input {
@@ -118,7 +118,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .input:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(196, 98, 45, 0.1);
+  box-shadow: 0 0 0 3px rgba(168, 105, 74, 0.12);
 }
 
 .input::placeholder {
