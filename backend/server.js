@@ -830,18 +830,21 @@ For each row include a "_confidence" field (0-100) reflecting how clearly you co
 Score based on: handwriting clarity, image quality, ambiguous characters, partially visible text.
 90+ = clearly legible, 70-89 = minor ambiguity, below 70 = significant uncertainty.`;
     } else {
-      prompt = `You are a restaurant inventory extraction AI. Look at this inventory sheet image and extract all the data.
+      Prompt = `You are a restaurant inventory extraction AI. Look at this inventory sheet image and extract all the data.
 
-The sheet has these columns: Item Category, Item Description, Unit (Box/Bag/Case), Par Level, On Hand, Order Amount.
+IMPORTANT: First look at the actual column headers on this sheet and use those exact columns. Do not assume a fixed structure. Common patterns include: Item/Unit/Par/On Hand/Order, or Item Category/Item Description/Unit/Par Level/On Hand/Order Amount, or other variations — always follow what's actually on the sheet. Use the exact column names as your JSON keys (lowercase, underscores for spaces).
 
 Rules:
-- Extract only actual inventory items
-- item_category must be read directly from the sheet exactly as written - do NOT infer or default to "Produce" or any other category
-- Preserve decimal quantities exactly as written (e.g. 3.25, 0.5)
-- Order amounts may be numbers, "check", X, or a dash
+- Extract every row that has an item, do not skip any
+- Preserve all values exactly as written: decimals (3.25), fractions (1/2), mixed (1/4 .65)
+- Order amounts may be numbers, "check", X, a dash — preserve exactly as written
+- Units should be preserved exactly as written (Case, Box, Bag, Jug, Pail, etc.)
+- item_category must be read directly from the sheet — do NOT infer or default to any category
+- Only include item_category if the sheet actually has a visible category column
 - Missing values should be null
-- If you cannot read an item name with confidence, output "UNCLEAR" instead of guessing. Never subsitute or invent item names.
-- Return ONLY valid JSON array, no explanations
+- Do NOT guess item names — use "UNCLEAR" if truly unreadable
+- Return ONLY a valid JSON array, no explanations
+
 
 Return a JSON array where each object has: item_category, item_description, unit, par_level, on_hand, order_amount, _confidence
 Only include item_category if the sheet actually has a visible category column. 
