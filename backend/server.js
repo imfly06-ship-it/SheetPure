@@ -760,28 +760,13 @@ app.post('/api/parse-inventory', upload.single('image'), async (req, res) => {
     const inventoryWithOrderAmounts = normalizedInventory.map(item => {
   const par = parseFloat(item.par_level);
   const onHand = parseFloat(item.on_hand);
-  const rawOrder = item.order_amount || item.order; 
-  
   const expectedOrder = (!isNaN(par) && !isNaN(onHand))
     ? Math.max(0, Math.ceil(par - onHand))
     : null;
 
-  if ((rawOrder === null || rawOrder === undefined || rawOrder === "") && expectedOrder !== null) {
-    item.order_amount = expectedOrder;
-    item._source = "calculated";
-  } else {
-    item.order_amount = rawOrder;
-    item._source = "extracted";
-
-    const parsedRawOrder = parseFloat(rawOrder);
-    if (expectedOrder !== null && !isNaN(parsedRawOrder)) {
-      const diff = Math.abs(expectedOrder - parsedRawOrder);
-      
-      if (diff > 2) {
-        item._flag = `Review needed: Math suggests ${expectedOrder}, but sheet says ${rawOrder}`;
-        item._needs_review = true;
-        item._confidence = Math.min(item._confidence || 50, 45); 
-      }
+  if (!item.order_amount && !item.order) {
+    if (expectedOrder !== null) {
+      item.order_amount = expectedOrder;
     }
   }
 
