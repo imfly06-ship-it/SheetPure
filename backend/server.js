@@ -830,6 +830,7 @@ CRITICAL: You MUST use EXACTLY these columns: ${templateColumns.join(', ')}
 
 Rules:
 - Extract only actual inventory items
+- Pay close attention to column alignment - each value must be placed in the correct column based on the header row, not based on position alone
 - item_category must be read directly from the sheet exactly as written - do NOT infer or default to "Produce" or any other category
 - Preserve decimal quantities exactly as written (e.g. 3.25, 0.5)
 - Order amounts may be numbers, "check", X, or a dash
@@ -847,6 +848,7 @@ IMPORTANT: First look at the actual column headers on this sheet and use those e
 
 Rules:
 - Extract every row that has an item, do not skip any
+- Pay close attention to column alignment - each value must be placed in the correct column based on the header row, not based on position alone
 - Preserve all values exactly as written: decimals (3.25), fractions (1/2), mixed (1/4 .65)
 - Order amounts may be numbers, "check", X, a dash — preserve exactly as written
 - Units should be preserved exactly as written (Case, Box, Bag, Jug, Pail, etc.)
