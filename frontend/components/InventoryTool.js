@@ -283,6 +283,26 @@ export default function InventoryTool({ userId = 'demo-business' }) {
     }
   };
 
+  const normalize = (str) => (str || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+
+const mergeWithDedup = (existing, incoming) => {
+  const master = [...existing];
+  incoming.forEach(item2 => {
+    const norm2 = normalize(item2.item_description || item2.item || '');
+    const existingIndex = master.findIndex(item1 => 
+      normalize(item1.item_description || item1.item || '') === norm2
+    );
+    if (existingIndex > -1) {
+      if ((item2._confidence || 0) > (master[existingIndex]._confidence || 0)) {
+        master[existingIndex] = item2;
+      }
+    } else {
+      master.push(item2);
+    }
+  });
+  return master;
+};
+
   const handleUploadClick = async () => {
     if (!selectedFiles.length) { alert('Please select at least one image first'); return; }
     setParsingInventory(true);
@@ -332,7 +352,7 @@ export default function InventoryTool({ userId = 'demo-business' }) {
       }
     }
 
-    setInventory((prev) => [...prev, ...allItems]);
+    setInventory((prev) => mergeWithDedup(prev,allItems));
     setExtractionProgress(`Done — extracted ${allItems.length} items from ${selectedFiles.length} image${selectedFiles.length > 1 ? 's' : ''}.`);
     setParsingInventory(false);
 
