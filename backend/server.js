@@ -758,13 +758,15 @@ app.post('/api/parse-inventory', upload.single('image'), async (req, res) => {
 
     const normalizedInventory = normalizeUnits(inventory);
     const inventoryWithOrderAmounts = normalizedInventory.map(item => {
-      const par = parseFloat(item.par_level);
-      const onHand = parseFloat(item.on_hand);
-      if (!isNaN(par) && !isNaN(onHand)) {
-        item.order_amount = Math.max(0, Math.ceil(par - onHand));
-      }
-      return item;
-    });
+  if (!item.order_amount && !item.order) {
+    const par = parseFloat(item.par_level);
+    const onHand = parseFloat(item.on_hand);
+    if (!isNaN(par) && !isNaN(onHand)) {
+      item.order_amount = Math.max(0, Math.ceil(par - onHand));
+    }
+  }
+  return item;
+});
 
     // Save items to Supabase if area and session context provided
     // Strip _confidence before saving — it's a UI hint only, not part of inventory data
